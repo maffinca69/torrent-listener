@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM golang:alpine as golang
+FROM golang:alpine as golang
 
 RUN apk add -U tzdata
 RUN apk --update add ca-certificates
