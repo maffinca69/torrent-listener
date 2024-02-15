@@ -10,7 +10,6 @@ import (
 func Notify(torrent transmissionrpc.Torrent) {
 	var messageText = fmt.Sprintf(infrastructure.Config().TelegramConfig.DownloadCompletedMessage, *torrent.Name)
 	msg := tgbotapi.NewMessage(infrastructure.Config().TelegramConfig.ChatID, messageText)
-	msg.ParseMode = "Markdown"
 
 	_, err := BotAPI().Send(msg)
 	if err != nil {
