@@ -1,0 +1,7 @@
+{
+  "cron_expression": "* * * * *",
+  "telegram": {
+    "download_completed_message": "%s: download completed!",
+    "chat_id": 000000000
+  }
+}
