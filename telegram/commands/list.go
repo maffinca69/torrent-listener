@@ -33,7 +33,7 @@ func getTorrents() string {
 	}
 
 	sort.Slice(torrents, func(i, j int) bool {
-		return torrents[i].DoneDate.Unix() > torrents[j].DoneDate.Unix()
+		return torrents[i].AddedDate.Unix() > torrents[j].AddedDate.Unix()
 	})
 
 	// Get latest 5 torrents
