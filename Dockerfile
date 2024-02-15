@@ -11,7 +11,7 @@ ARG TARGETOS
 RUN go mod download
 RUN go mod verify
 
-RUN CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH go build -o /notifier .
+RUN CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH go build -o /torrent-listener .
 
 FROM scratch
 
