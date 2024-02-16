@@ -26,7 +26,7 @@ func LongPulling() {
 		var command = message.Command()
 		var commandHandler = ResolveCommand(command)
 		if commandHandler != nil {
-			commandHandler.Handle(message, bot)
+			go commandHandler.Handle(message, bot)
 		}
 	}
 }

@@ -13,6 +13,7 @@ type RepositoryConfig struct {
 type TelegramConfig struct {
 	ChatID                   int64  `json:"chat_id"`
 	DownloadCompletedMessage string `json:"download_completed_message"`
+	WelcomeMessage           string `json:"welcome_message"`
 }
 
 type Configuration struct {

@@ -32,7 +32,7 @@ func main() {
 func setupCron() {
 	c := cron.New()
 
-	if _, err := c.AddFunc(infrastructure.Config().CronExpression, func() { checkTorrents() }); err != nil {
+	if _, err := c.AddFunc(infrastructure.Config().CronExpression, checkTorrents); err != nil {
 		panic("Error start schedule function")
 	}
 
@@ -40,20 +40,24 @@ func setupCron() {
 }
 
 func checkTorrents() {
-	var wg sync.WaitGroup
+	torrents, _ := transmission.Client().TorrentGetAll(context.TODO())
+	if len(torrents) == 0 {
+		fmt.Println("Not found torrents")
+		return
+	}
+
+	var waitGroup sync.WaitGroup
+	waitGroup.Add(len(torrents))
 
 	rateLimit := rate_limiter.NewLimiter(1*time.Second, 30)
-	torrents, _ := transmission.Client().TorrentGetAll(context.TODO())
-	wg.Add(len(torrents))
-
 	for _, torrent := range torrents {
 		go func(torrent transmissionrpc.Torrent) {
-			defer wg.Done()
+			defer waitGroup.Done()
 			notifyIfNeeded(torrent, rateLimit)
 		}(torrent)
 	}
 
-	wg.Wait()
+	waitGroup.Wait()
 }
 
 func notifyIfNeeded(torrent transmissionrpc.Torrent, limiter rate_limiter.Limiter) {
