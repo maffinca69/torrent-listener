@@ -42,8 +42,6 @@ func LongPulling() {
 func isRestrictedCommand(command string) bool {
 	allowedCommand := infrastructure.Config().AllowedCommands
 
-	log.Println(!slices.Contains(allowedCommand, command))
-
 	return !slices.Contains(allowedCommand, command)
 }
 
