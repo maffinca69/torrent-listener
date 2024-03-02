@@ -3,5 +3,11 @@
   "telegram": {
     "download_completed_message": "%s: download completed!",
     "chat_id": 000000000
-  }
+  },
+  "allowed_users": [
+    121212312123
+  ],
+  "allowed_commands": [
+    "me"
+  ]
 }
